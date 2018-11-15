@@ -53,9 +53,15 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		myRobot = new MecanumDrive(new Victor(0), new Victor(1), new Victor(2), new Victor(3)); //PMW ports 0 & 1
+		Victor driveMotor1 = new Victor(0);
+		Victor driveMotor2 = new Victor(1);
+		Victor driveMotor3 = new Victor(2);
+		Victor driveMotor4 = new Victor(3);
+		myRobot = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); //PMW ports 0 & 1
 		//CollectorMotor1.setInverted(true);
-        leftStick = new Joystick(0); //USB port 0
+		driveMotor1.setInverted(true);
+		driveMotor3.setInverted(true);
+		leftStick = new Joystick(0); //USB port 0
         rightStick = new Joystick(1); //USB port 1
         myComp.start();
 	}
@@ -132,6 +138,7 @@ public class Robot extends TimedRobot {
 		LiftMotor1.set(rightStick.getY());
 		LiftMotor2.set(rightStick.getY());
 		
+		// for pneumatics
 		if(leftStick.getRawButton(2)) {
 			//OpenAndCloseMotor.set(1);
 			openClose.set(true);
