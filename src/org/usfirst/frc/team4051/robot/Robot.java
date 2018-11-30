@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4051.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -43,6 +44,7 @@ public class Robot extends TimedRobot {
 	Compressor myComp = new Compressor(0);
 	Solenoid openClose = new Solenoid(1);
 	Solenoid closeOpen = new Solenoid(2);
+	DigitalInput myLimitSwitch = new DigitalInput();
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -151,7 +153,7 @@ public class Robot extends TimedRobot {
 			}
 		}
 		
-		if(rightStick.getRawButton(2)) {
+		if(rightStick.getRawButton(2) && !myLimitSwitch.get()) {
 			CollectorMotor1.set(1);
 			CollectorMotor2.set(1);
 		}else {
