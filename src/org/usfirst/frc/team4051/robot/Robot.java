@@ -29,7 +29,7 @@ import org.usfirst.frc.team4051.robot.subsystems.ExampleSubsystem;
 public class Robot extends TimedRobot {
 	public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
 	public static OI m_oi;
-		
+		//this formatting is horrible
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 	MecanumDrive myRobot;
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
 	Compressor myComp = new Compressor(0);
 	Solenoid openClose = new Solenoid(1);
 	Solenoid closeOpen = new Solenoid(2);
-	DigitalInput myLimitSwitch = new DigitalInput();
+	DigitalInput myLimitSwitch = new DigitalInput(0);
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -56,8 +56,8 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		Victor driveMotor1 = new Victor(0);
-		Victor driveMotor2 = new Victor(1);
-		Victor driveMotor3 = new Victor(2);
+		Victor driveMotor2 = new Victor(2);
+		Victor driveMotor3 = new Victor(1);
 		Victor driveMotor4 = new Victor(3);
 		myRobot = new MecanumDrive(driveMotor1, driveMotor2, driveMotor3, driveMotor4); //PMW ports 0 & 1
 		//CollectorMotor1.setInverted(true);
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		//myRobot.tankDrive(leftStick.getY(), rightStick.getY());
-		myRobot.driveCartesian(leftStick.getX(), -leftStick.getY(),  leftStick.getZ());
+		myRobot.driveCartesian(leftStick.getZ(), -leftStick.getY(),  leftStick.getX());
 		LiftMotor1.set(rightStick.getY());
 		LiftMotor2.set(rightStick.getY());
 		
